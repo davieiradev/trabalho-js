@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções JavaScript</title>
+    <link rel="stylesheet" href="./home.css">
+        
+</head>
+<body>
+    <h1>Funções JavaScript</h1>
+
+    <div>
+        <h2>1. MAIOR_MENOR</h2>
+        <label for="maiorMenor">Digite 5 valores inteiros (separados por espaço):</label>
+        <input type="text" id="maiorMenor" placeholder="Ex: 3 1 4 1 5">
+        <button onclick="maiorMenor()">Calcular Maior e Menor</button>
+        <div id="maiorMenorResult" class="result"></div>
+    </div>
+
+    <div>
+        <h2>2. VOGAL</h2>
+        <label for="vogal">Digite um caractere:</label>
+        <input type="text" id="vogal" maxlength="1">
+        <button onclick="verificarVogal()">Verificar Vogal</button>
+        <div id="vogalResult" class="result"></div>
+    </div>
+
+    <div>
+        <h2>3. LIMITES</h2>
+        <label for="limites">Digite os limites inferior e superior (separados por espaço):</label>
+        <input type="text" id="limites" placeholder="Ex: 1 10">
+        <button onclick="imprimirPares()">Imprimir Pares</button>
+        <div id="limitesResult" class="result"></div>
+    </div>
+
+    <div>
+        <h2>4. ORDEM</h2>
+        <label for="ordem">Digite 3 valores inteiros (separados por espaço):</label>
+        <input type="text" id="ordem" placeholder="Ex: 7 2 5">
+        <button onclick="ordenar()">Ordenar</button>
+        <div id="ordemResult" class="result"></div>
+    </div>
+
+    <div>
+        <h2>5. POSITIVO_NEGATIVO</h2>
+        <label for="positivoNegativo">Digite um valor inteiro:</label>
+        <input type="number" id="positivoNegativo">
+        <button onclick="positivoNegativo()">Verificar Positivo ou Negativo</button>
+        <div id="positivoNegativoResult" class="result"></div>
+    </div>
+
+    <div>
+        <h2>6. PAR_IMPAR</h2>
+        <label for="parImpar">Digite um valor inteiro:</label>
+        <input type="number" id="parImpar">
+        <button onclick="parImpar()">Verificar Par ou Ímpar</button>
+        <div id="parImparResult" class="result"></div>
+    </div>
+
+    <script>
+        function maiorMenor() {
+            let values = document.getElementById('maiorMenor').value.split(' ').map(Number);
+            if (values.length !== 5) {
+                document.getElementById('maiorMenorResult').innerText = 'Por favor, insira exatamente 5 valores.';
+                return;
+            }
+            let maior = Math.max(...values);
+            let menor = Math.min(...values);
+            document.getElementById('maiorMenorResult').innerText = `Maior valor: ${maior}, Menor valor: ${menor}`;
+        }
+
+        function verificarVogal() {
+            let c = document.getElementById('vogal').value.toLowerCase();
+            let result = (['a', 'e', 'i', 'o', 'u'].includes(c)) ? 1 : 0;
+            document.getElementById('vogalResult').innerText = `Resultado: ${result}`;
+        }
+
+        function imprimirPares() {
+            let [li, ls] = document.getElementById('limites').value.split(' ').map(Number);
+            if (isNaN(li) || isNaN(ls) || li >= ls) {
+                document.getElementById('limitesResult').innerText = 'Por favor, insira limites válidos e crescentes.';
+                return;
+            }
+            let pares = [];
+            let soma = 0;
+            for (let i = li + 1; i < ls; i++) {
+                if (i % 2 === 0) {
+                    pares.push(i);
+                    soma += i;
+                }
+            }
+            document.getElementById('limitesResult').innerText = `Números pares: ${pares.join(', ')}. Somatório: ${soma}`;
+        }
+
+        function ordenar() {
+            let [a, b, c] = document.getElementById('ordem').value.split(' ').map(Number);
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                document.getElementById('ordemResult').innerText = 'Por favor, insira exatamente 3 valores.';
+                return;
+            }
+            let sorted = [a, b, c].sort((x, y) => x - y);
+            document.getElementById('ordemResult').innerText = `Valores em ordem crescente: ${sorted.join(', ')}`;
+        }
+
+        function positivoNegativo() {
+            let x = Number(document.getElementById('positivoNegativo').value);
+            let isPositive = x >= 0;
+            document.getElementById('positivoNegativoResult').innerText = `O valor é ${isPositive ? 'positivo' : 'negativo'}`;
+        }
+
+        function parImpar() {
+            let x = Number(document.getElementById('parImpar').value);
+            let isEven = (x % 2 === 0);
+            document.getElementById('parImparResult').innerText = `O valor é ${isEven ? 'par' : 'ímpar'}`;
+        }
+    </script>
+</body>
+</html>
